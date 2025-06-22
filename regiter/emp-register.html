@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sharnbasva University | Job Portal</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script type="module" src="/firebaseauth.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+
+    <!-- <img class="mainimg" src="./icons/header2.png" alt="" /> -->
+    <img class="mainimg" src="../icons/header2.png" alt="" />
+
+    <header>
+      <nav class="navHeader">
+        <!-- Responsive -->
+        <div class="responsiveNavBar">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+
+               <div class="NavBar">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#jobListing">Job Listings</a>
+          <a href="../resources/resource.html">Resources</a>
+          <a href="../alumini/alumini.html">Alumni</a>
+          <a href="../regiter/register_index.html">Register</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+<main>
+
+  <div class="tab-buttons">
+    <button onclick="showForm('registerForm')">Register</button>
+    <button onclick="showForm('loginForm')">Login</button>
+  </div>
+
+  <!-- Employer Register Form -->
+  <div id="registerForm" class="employer-form" style="display: block;">
+    <form id="employer-register-form">
+      <label for="company">Company Name:</label><br>
+      <input type="text" id="company" name="company" required><br><br>
+
+      <label for="location">Company Location:</label><br>
+      <input type="text" id="location" name="location" required><br><br>
+
+      <label for="employer_email">Company Email:</label><br>
+      <input type="email" id="employer_email" name="email" required><br><br>
+
+      <label for="employer_password">Password:</label><br>
+      <input type="password" id="employer_password" name="password" required><br><br>
+
+      <label for="employer_confirm_password">Confirm Password:</label><br>
+      <input type="password" id="employer_confirm_password" name="confirm_password" required><br><br>
+
+      <button type="submit" id="employer_register-btn-id">Register</button>
+      <div id="employerSignUpMsg" class="msgDiv" style="display: none;"></div>
+    </form>
+  </div>
+
+  <!-- Employer Login Form -->
+  <div id="loginForm" class="employer-form" style="display: none;">
+    <form id="employer-login-form">
+      <label for="employer_login_email">Email:</label><br>
+      <input type="email" id="employer_login_email" name="email" required><br><br>
+
+      <label for="employer_login_password">Password:</label><br>
+      <input type="password" id="employer_login_password" name="password" required><br><br>
+
+      <button type="submit" id="employer_login-btn-id">Login</button>
+      <div id="employerSignInMsg" class="msgDiv" style="display: none;"></div>
+    </form>
+  </div>
+
+</main>
+
+
+
+  <!-- footer -->
+    <section class="footersection obj-width">
+      <div class="topWraper">
+        <div class="top">
+          <img src="/icons/sharn.jfif" alt="" />
+          <p>Search your desired jobs</p>
+        </div>
+        <div class="sideIcons">
+          <a
+            href="https://www.facebook.com/61555837550331/about/?_rdr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/suklb/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a
+            href="https://x.com/EduResultPortal/status/1847359398844186719"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+
+          <a
+            href="https://in.linkedin.com/school/sharnbasva-university-kalaburagi/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+      <div class="bottom">
+        <div>
+          <h3>Project</h3>
+          <a href="#">changing</a>
+          <a href="#">Status</a>
+          <a href="#">Licence</a>
+          <a href="#">All Versions</a>
+        </div>
+
+        <div>
+          <h3>Community</h3>
+          <a href="#">GitHub</a>
+          <a href="#">Issues</a>
+          <a href="#">Project</a>
+          <a href="#">Twitter</a>
+        </div>
+
+        <div>
+          <h3>Help</h3>
+          <a href="#">Support</a>
+          <a href="#">Troubleshooting</a>
+          <a href="#">Contact Us</a>
+        </div>
+
+        <div>
+          <h3>Others</h3>
+          <a href="#">Terms of Servies</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">License</a>
+        </div>
+      </div>
+    </section>
+  </body>
+
+<script>
+  function showForm(formId) {
+    const forms = ['registerForm', 'loginForm'];
+    forms.forEach(id => {
+      document.getElementById(id).style.display = (id === formId) ? 'block' : 'none';
+    });
+  }
+</script>
+</html>

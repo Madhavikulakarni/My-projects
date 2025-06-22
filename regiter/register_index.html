@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sharnbasva University | Job Portal</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/firebaseauth.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      .toggle-buttons {
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .toggle-buttons button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <img class="mainimg" src="./icons/header2.png" alt="" />
+
+    <header>
+      <nav class="navHeader">
+        <div class="responsiveNavBar">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+              <div class="NavBar">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#jobListing">Job Listings</a>
+          <a href="../resources/resource.html">Resources</a>
+          <a href="../alumini/alumini.html">Alumni</a>
+          <a href="../regiter/register_index.html">Register</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Toggle Buttons -->
+    <div class="toggle-buttons">
+      <button onclick="showRegister()">Register</button>
+      <button onclick="showLogin()">Login</button>
+    </div>
+
+    <!--  Student Register Form -->
+    <div class="student-register-container" id="register-form">
+      <h2>Student Registration</h2>
+      <form id="student-register-form" enctype="multipart/form-data">
+
+        <label for="fullname">Full Name:</label><br />
+        <input type="text" id="fullname" name="fullname" required /><br /><br />
+
+        <label for="email">University Email ID:</label><br />
+        <input type="email" id="email" name="email" required /><br /><br />
+
+        <label for="mobile">Mobile Number:</label><br />
+        <input
+          type="tel"
+          id="mobile"
+          name="mobile"
+          required
+          pattern="[0-9]{10}"
+        /><br /><br />
+
+        <label for="course">Degree / Course:</label><br />
+        <input type="text" id="course" name="course" required /><br /><br />
+
+        <label for="department">Department:</label><br />
+        <input type="text" id="department" name="department" required /><br /><br />
+
+        <label for="year">Year of Passing:</label><br />
+        <input type="text" id="year" name="year" required /><br /><br />
+
+        <label for="resume">Upload Resume (PDF only):</label><br />
+        <input
+          type="file"
+          id="resume"
+          name="resume"
+          accept=".pdf"
+          required
+        /><br /><br />
+
+        <label for="password">Password:</label><br />
+        <input type="password" id="password" name="password" required /><br /><br />
+
+        <label for="confirm_password">Confirm Password:</label><br />
+        <input
+          type="password"
+          id="confirm_password"
+          name="confirm_password"
+          required
+        /><br /><br />
+
+        <button
+          class="Student_register-btn-class"
+          id="Student_register-btn-id"
+          type="submit"
+        >
+          Sign Up
+        </button>
+        <div id="signUpMsg" class="alert-message" style="display: none;"></div>
+
+      </form>
+    </div>
+
+    <!--  Student Login Form -->
+    <div class="student-login-container" id="login-form" style="display: none;">
+      <h2>Student Login</h2>
+      <form id="student-login-form">
+<div id="signInMsg" class="alert-message" style="display: none;"></div>
+
+        <label for="login_email">University Email ID:</label><br />
+        <input type="email" id="login_email" name="login_email" required /><br /><br />
+
+        <label for="login_password">Password:</label><br />
+        <input type="password" id="login_password" name="login_password" required /><br /><br />
+
+        <button
+          class="Student_login-btn-class"
+          id="Student_login-btn-id"
+          type="submit"
+        >
+          Sign In
+        </button>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <section class="footersection obj-width">
+      <div class="topWraper">
+        <div class="top">
+          <img src="/icons/sharn.jfif" alt="" />
+          <p>Search your desired jobs</p>
+        </div>
+        <div class="sideIcons">
+          <a href="https://www.facebook.com/61555837550331/about/?_rdr" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.instagram.com/suklb/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://x.com/EduResultPortal/status/1847359398844186719" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://in.linkedin.com/school/sharnbasva-university-kalaburagi/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <div>
+          <h3>Project</h3>
+          <a href="#">changing</a><a href="#">Status</a><a href="#">Licence</a><a href="#">All Versions</a>
+        </div>
+        <div>
+          <h3>Community</h3>
+          <a href="#">GitHub</a><a href="#">Issues</a><a href="#">Project</a><a href="#">Twitter</a>
+        </div>
+        <div>
+          <h3>Help</h3>
+          <a href="#">Support</a><a href="#">Troubleshooting</a><a href="#">Contact Us</a>
+        </div>
+        <div>
+          <h3>Others</h3>
+          <a href="#">Terms of Servies</a><a href="#">Privacy Policy</a><a href="#">License</a>
+        </div>
+      </div>
+    </section>
+
+    <!--Scripts -->
+    <script>
+      function showRegister() {
+        document.getElementById("register-form").style.display = "block";
+        document.getElementById("login-form").style.display = "none";
+      }
+
+      function showLogin() {
+        document.getElementById("register-form").style.display = "none";
+        document.getElementById("login-form").style.display = "block";
+      }
+
+      // Show register by default
+      window.onload = () => {
+        showRegister();
+      };
+    </script>
+    <script src="./script.js"></script>
+  </body>
+</html>

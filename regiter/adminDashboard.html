@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sharnbasva University Job Portal - Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial;
+      max-width: 600px;
+      margin: auto;
+      padding: 2rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+      height: 80px;
+    }
+    .job-card {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+    }
+    button {
+      margin-right: 0.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<!-- Example: inside your header or navbar -->
+<div id="loggedInUser" style="position:absolute; top:10px; right:20px; font-weight:bold; color:#333;"></div>
+<button id="logoutBtn" style="position:absolute; top:40px; right:20px;">Logout</button>
+
+  <h2>Post a Job</h2>
+  <form id="job-form">
+    <input type="text" id="title" placeholder="Job Title (e.g., Web Developer)" required />
+    <input type="text" id="company" placeholder="Company Name" required />
+    <input type="text" id="location" placeholder="Location (e.g., Bangalore, India)" required />
+    <input type="text" id="vacancy" placeholder="Vacancy (e.g., 02)" required />
+    <input type="text" id="hours" placeholder="Working Hours (e.g., 50h/week)" required />
+    <input type="text" id="salary" placeholder="Salary (e.g., 6LPA - 8LPA)" required />
+    <input type="text" id="employment" placeholder="Employment Type (e.g., Full Time)" required />
+    <input type="text" id="workplace" placeholder="Workplace (e.g., On-site / Remote)" required />
+    <input type="text" id="education" placeholder="Education Required (e.g., Bachelor degree in CS)" required />
+    <input type="text" id="experience" placeholder="Experience Required (e.g., 0-2 years)" required />
+    <input type="text" id="logo" placeholder="Logo URL (e.g., ./icons/paytm.png)" required />
+    <input type="url" id="applyLink" placeholder="Apply Link (e.g., https://company.com/apply)" required />
+    <textarea id="description" placeholder="Job Description" required></textarea>
+
+    <button type="submit">Post Job</button>
+  </form>
+
+  <hr />
+
+  <h2>Posted Jobs</h2>
+  <div id="job-list"></div>
+
+  <script>
+    const jobForm = document.getElementById("job-form");
+    const jobList = document.getElementById("job-list");
+
+    // Load existing jobs from localStorage
+    let jobs = JSON.parse(localStorage.getItem("jobData")) || [];
+
+    renderJobs();
+
+    jobForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const job = {
+        id: Date.now(),
+        email: currentUserEmail,
+        title: document.getElementById("title").value.trim(),
+        company: document.getElementById("company").value.trim(),
+        location: document.getElementById("location").value.trim(),
+        vacancy: document.getElementById("vacancy").value.trim(),
+        hours: document.getElementById("hours").value.trim(),
+        salary: document.getElementById("salary").value.trim(),
+        employment: document.getElementById("employment").value.trim(),
+        workplace: document.getElementById("workplace").value.trim(),
+        education: document.getElementById("education").value.trim(),
+        experience: document.getElementById("experience").value.trim(),
+        logo: document.getElementById("logo").value.trim(),
+        applyLink: document.getElementById("applyLink").value.trim(),
+        description: document.getElementById("description").value.trim()
+      };
+
+      jobs.push(job);
+      localStorage.setItem("jobData", JSON.stringify(jobs));
+      renderJobs();
+      jobForm.reset();
+    });
+
+  function renderJobs() {
+  jobList.innerHTML = "";
+
+  const filteredJobs = currentUserEmail
+    ? jobs.filter(job => job.email === currentUserEmail)
+    : jobs; // 👈 show all jobs when no user is logged in
+
+  filteredJobs.forEach(job => {
+    const div = document.createElement("div");
+    div.className = "job-card";
+    div.innerHTML = `
+      <h3>${job.title}</h3>
+      <p><em>${job.company}</em></p>
+      <p><strong>Location:</strong> ${job.location}</p>
+      <p><strong>Vacancy:</strong> ${job.vacancy}</p>
+      <p><strong>Working Hours:</strong> ${job.hours}</p>
+      <p><strong>Salary:</strong> ${job.salary}</p>
+      <img src="${job.logo}" alt="${job.company} Logo" width="80" /><br><br>
+      <button onclick="applyJob('${encodeURIComponent(job.applyLink)}')">Apply</button>
+      ${currentUserEmail === job.email ? `
+        <button onclick="editJob(${job.id})">Edit</button>
+        <button onclick="deleteJob(${job.id})">Delete</button>
+      ` : ""}
+    `;
+    jobList.appendChild(div);
+  });
+}
+
+
+function editJob(id) {
+  const job = jobs.find(job => job.id === id);
+  if (!job) return;
+
+  const newTitle = prompt("Update job title:", job.title);
+  const newCompany = prompt("Update company name:", job.company);
+  const newLocation = prompt("Update location:", job.location);
+  const newVacancy = prompt("Update vacancy:", job.vacancy);
+  const newHours = prompt("Update working hours:", job.hours);
+  const newSalary = prompt("Update salary:", job.salary);
+  const newEmployment = prompt("Update employment type:", job.employment);
+  const newWorkplace = prompt("Update workplace:", job.workplace);
+  const newEducation = prompt("Update education required:", job.education);
+  const newExperience = prompt("Update experience required:", job.experience);
+  const newLogo = prompt("Update logo URL:", job.logo);
+  const newApplyLink = prompt("Update apply link:", job.applyLink);
+  const newDescription = prompt("Update description:", job.description);
+
+  if (
+    newTitle && newCompany && newLocation && newVacancy && newHours && newSalary &&
+    newEmployment && newWorkplace && newEducation && newExperience && newLogo &&
+    newApplyLink && newDescription
+  ) {
+    job.title = newTitle.trim();
+    job.company = newCompany.trim();
+    job.location = newLocation.trim();
+    job.vacancy = newVacancy.trim();
+    job.hours = newHours.trim();
+    job.salary = newSalary.trim();
+    job.employment = newEmployment.trim();
+    job.workplace = newWorkplace.trim();
+    job.education = newEducation.trim();
+    job.experience = newExperience.trim();
+    job.logo = newLogo.trim();
+    job.applyLink = newApplyLink.trim();
+    job.description = newDescription.trim();
+
+    localStorage.setItem("jobData", JSON.stringify(jobs));
+    renderJobs();
+  }
+}
+
+
+    function deleteJob(id) {
+      jobs = jobs.filter(job => job.id !== id);
+      localStorage.setItem("jobData", JSON.stringify(jobs));
+      renderJobs();
+    }
+
+
+   const newDescription = prompt("Update job description:", job.description);
+const newApplyLink = prompt("Update job application link:", job.applyLink);
+
+if (
+  newTitle && newCompany && newLocation && newVacancy && newHours && newSalary &&
+  newEmployment && newWorkplace && newEducation && newExperience && newLogo &&
+  newDescription && newApplyLink
+) {
+  job.title = newTitle.trim();
+  job.company = newCompany.trim();
+  job.location = newLocation.trim();
+  job.vacancy = newVacancy.trim();
+  job.hours = newHours.trim();
+  job.salary = newSalary.trim();
+  job.employment = newEmployment.trim();
+  job.workplace = newWorkplace.trim();
+  job.education = newEducation.trim();
+  job.experience = newExperience.trim();
+  job.logo = newLogo.trim();
+  job.description = newDescription.trim();
+  job.applyLink = newApplyLink.trim(); 
+
+  localStorage.setItem("jobData", JSON.stringify(jobs));
+  renderJobs();
+}
+
+
+    // function for apply link url test 
+
+function applyJob(encodedUrl) {
+  const url = decodeURIComponent(encodedUrl);
+  if (url && url.startsWith("http")) {
+    window.open(url, "_blank");
+  } else {
+    alert("Invalid apply link.");
+  }
+}
+  </script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBG7tJ3YvOw4c2X176sC6Vl1FjMxyW3pkw",
+    authDomain: "login-form-4122e.firebaseapp.com",
+    projectId: "login-form-4122e",
+    storageBucket: "login-form-4122e.appspot.com",
+    messagingSenderId: "303975914691",
+    appId: "1:303975914691:web:71556ba7da972bc1645676"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const loggedInUserDiv = document.getElementById("loggedInUser");
+  const logoutBtn = document.getElementById("logoutBtn");
+  let currentUserEmail = null;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      currentUserEmail = user.email;
+      loggedInUserDiv.textContent = `👋 Welcome, ${currentUserEmail}`;
+
+      const jobForm = document.getElementById("job-form");
+      const jobList = document.getElementById("job-list");
+
+      let jobs = JSON.parse(localStorage.getItem("jobData")) || [];
+
+      renderJobs();
+
+      jobForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const job = {
+          id: Date.now(),
+          email: currentUserEmail,
+          title: document.getElementById("title").value.trim(),
+          company: document.getElementById("company").value.trim(),
+          location: document.getElementById("location").value.trim(),
+          vacancy: document.getElementById("vacancy").value.trim(),
+          hours: document.getElementById("hours").value.trim(),
+          salary: document.getElementById("salary").value.trim(),
+          employment: document.getElementById("employment").value.trim(),
+          workplace: document.getElementById("workplace").value.trim(),
+          education: document.getElementById("education").value.trim(),
+          experience: document.getElementById("experience").value.trim(),
+          logo: document.getElementById("logo").value.trim(),
+          applyLink: document.getElementById("applyLink").value.trim(),
+          description: document.getElementById("description").value.trim()
+        };
+
+        jobs.push(job);
+        localStorage.setItem("jobData", JSON.stringify(jobs));
+        renderJobs();
+        jobForm.reset();
+      });
+
+      function renderJobs() {
+        jobList.innerHTML = "";
+        const filteredJobs = jobs.filter(job => job.email === currentUserEmail);
+
+        filteredJobs.forEach(job => {
+          const div = document.createElement("div");
+          div.className = "job-card";
+          div.innerHTML = `
+            <h3>${job.title}</h3>
+            <p><em>${job.company}</em></p>
+            <p><strong>Location:</strong> ${job.location}</p>
+            <p><strong>Vacancy:</strong> ${job.vacancy}</p>
+            <p><strong>Working Hours:</strong> ${job.hours}</p>
+            <p><strong>Salary:</strong> ${job.salary}</p>
+            <img src="${job.logo}" alt="${job.company} Logo" width="80" /><br><br>
+            <button onclick="applyJob('${encodeURIComponent(job.applyLink)}')">Apply</button>
+            <button onclick="deleteJob(${job.id})">Delete</button>
+          `;
+          jobList.appendChild(div);
+        });
+      }
+
+      function deleteJob(id) {
+        jobs = jobs.filter(job => job.id !== id);
+        localStorage.setItem("jobData", JSON.stringify(jobs));
+        renderJobs();
+      }
+
+      window.deleteJob = deleteJob; // expose globally for button onclick
+      window.applyJob = function(encodedUrl) {
+        const url = decodeURIComponent(encodedUrl);
+        if (url && url.startsWith("http")) {
+          window.open(url, "_blank");
+        } else {
+          alert("Invalid apply link.");
+        }
+      };
+
+    } else {
+      currentUserEmail = null;
+      loggedInUserDiv.textContent = "Not logged in";
+    }
+  });
+
+  // Logout handler
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      window.location.href = "/regiter/adminDashboard.html";
+    } catch (error) {
+      alert("Error signing out: " + error.message);
+    }
+  });
+</script>
+
+
+</body>
+</html>

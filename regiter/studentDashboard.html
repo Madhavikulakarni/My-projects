@@ -1,0 +1,185 @@
+<!DOCTYPE NavBarhtml>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sharnbasva University | student-Dashboard</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .user-bar {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: #f5f5f5;
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+      .user-bar span {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="mainimg" src="../icons/header2.png" alt="" />
+
+    <header>
+      <nav class="navHeader">
+        <div class="responsiveNavBar">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+                <div class="NavBar">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#jobListing">Job Listings</a>
+          <a href="../resources/resource.html">Resources</a>
+          <a href="../alumini/alumini.html">Alumni</a>
+          <a href="../regiter/register_index.html">Register</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="user-bar">
+      <span id="loggedInUser">Checking login status...</span>
+      <button id="logoutBtn">Logout</button>
+    </div>
+
+    <section class="hero">
+      <div class="middleContent">
+        <h1>Welcome to Sharnbasva University Job Portal</h1>
+        <p>Connecting students and employers for better future</p>
+        <a href="#jobListing" class="btn">Browse Jobs</a>
+      </div>
+    </section>
+
+    <section class="jobListing-section" id="jobListing">
+      <div class="jobListing-top">
+        <h2>On Campus Jobs</h2>
+        <p>Feel free to Explore the fields of your Interest</p>
+      </div>
+
+      <div class="search">
+        <input type="text" placeholder="Search jobs by titles" />
+        <button>Search</button>
+      </div>
+
+      <div class="jobContainer"></div>
+    </section>
+
+    <section class="footersection obj-width">
+      <div class="topWraper">
+        <div class="top">
+          <img src="./icons/sharn.jfif" alt="" />
+          <p>Search your desired jobs</p>
+        </div>
+        <div class="sideIcons">
+          <a href="https://www.facebook.com/61555837550331/about/?_rdr" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.instagram.com/suklb/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://x.com/EduResultPortal/status/1847359398844186719" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://in.linkedin.com/school/sharnbasva-university-kalaburagi/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="bottom">
+        <div>
+          <h3>Project</h3>
+          <a href="#">changing</a>
+          <a href="#">Status</a>
+          <a href="#">Licence</a>
+          <a href="#">All Versions</a>
+        </div>
+        <div>
+          <h3>Community</h3>
+          <a href="#">GitHub</a>
+          <a href="#">Issues</a>
+          <a href="#">Project</a>
+          <a href="#">Twitter</a>
+        </div>
+        <div>
+          <h3>Help</h3>
+          <a href="#">Support</a>
+          <a href="#">Troubleshooting</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <div>
+          <h3>Others</h3>
+          <a href="#">Terms of Servies</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">License</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+<script>
+  const hardcodedJobs = [
+    { logo: "./icons/paytm.png", title: "Web Developer", salary: "6LPA", company: "paytm" },
+    { logo: "./icons/Accenture.png", title: "App Developer", salary: "7LPA", company: "accenture" },
+    { logo: "./icons/cap.png", title: "Network Engineer", salary: "6LPA", company: "capgemini" },
+    { logo: "./icons/cognizant.png", title: "Web Developer", salary: "5LPA", company: "cognizant" },
+    { logo: "./icons/download.png", title: "Tester", salary: "3LPA", company: "random" },
+    { logo: "./icons/infosys.png", title: "System Engineer", salary: "4LPA", company: "infosys" },
+    { logo: "./icons/khatabook.png", title: "Data Analyst", salary: "6LPA", company: "khatabook" },
+    { logo: "./icons/tcs.jfif", title: "Tester", salary: "3LPA", company: "tcs" },
+    { logo: "./icons/upstock.png", title: "Web Developer", salary: "8LPA", company: "upstock" },
+    { logo: "./icons/zeta.png", title: "Cloud Engineer", salary: "5LPA", company: "zeta" }
+  ];
+  const savedJobs = JSON.parse(localStorage.getItem('jobData')) || [];
+  const allJobs = [...hardcodedJobs, ...savedJobs];
+  const jobContainer = document.querySelector('.jobContainer');
+  const moreButton = document.createElement('div');
+  moreButton.className = 'btn2';
+  moreButton.innerHTML = '<button class="btn">more...</button>';
+  allJobs.forEach(job => {
+    const div = document.createElement('div');
+    div.className = 'jobLysts';
+    div.innerHTML = `
+      <img src="${job.logo}" alt="" />
+      <h3 class="job-title">${job.title}</h3>
+      <p>${job.salary}</p>
+      <a href="jobs/job.detail.html?company=${job.company}" class="details-link">Details</a>
+    `;
+    jobContainer.appendChild(div);
+  });
+  jobContainer.appendChild(moreButton);
+</script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBG7tJ3YvOw4c2X176sC6Vl1FjMxyW3pkw",
+    authDomain: "login-form-4122e.firebaseapp.com",
+    projectId: "login-form-4122e",
+    storageBucket: "login-form-4122e.appspot.com",
+    messagingSenderId: "303975914691",
+    appId: "1:303975914691:web:71556ba7da972bc1645676"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const loggedInUserDiv = document.getElementById("loggedInUser");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loggedInUserDiv.textContent = `👋 Welcome, ${user.email}`;
+    } else {
+      loggedInUserDiv.textContent = "Not logged in";
+    }
+  });
+
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      window.location.href = "/regiter/register_index.html";
+    } catch (error) {
+      alert("Error signing out: " + error.message);
+    }
+  });
+</script>
