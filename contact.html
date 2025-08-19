@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sharnbasva University | Job Portal</title>
-    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,20 +19,32 @@
   </head>
 
   <body>
-    <header>
+   <header>
+
       <nav class="navHeader">
-        <!-- Responsive -->
-        <div class="responsiveNavBar">
-          <i class="fa-solid fa-bars"></i>
+   
+        <div class="hamburgerMenu">
+            <img id="hamMenuId" onclick="show()" src="./icons/assets/menu_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg " alt="">
         </div>
 
-                <div class="NavBar">
-          <a href="../index.html">Home</a>
-          <a href="../index.html#jobListing">Job Listings</a>
-          <a href="../resources/resource.html">Resources</a>
-          <a href="../alumini/alumini.html">Alumni</a>
-          <a href="../regiter/register_index.html">Register</a>
-          <a href="../contact.html">Contact</a>
+        <div class="NavBar">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#jobListing">Job Listings</a>
+          <a href="./resources/resource.html">Resources</a>
+          <a href="./alumini/alumini.html">Alumni</a>
+          <a href="./regiter/register_index.html">Register</a>
+          <a href="./contact.html">Contact</a>
+        </div>
+
+        <div class="resNav">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#jobListing">Job Listings</a>
+          <a href="./resources/resource.html">Resources</a>
+          <a href="./alumini/alumini.html">Alumni</a>
+          <a href="./regiter/register_index.html">Register</a>
+          <a href="./contact.html">Contact</a>
+          <img id="imgClose" src="./icons/assets/close_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+
         </div>
       </nav>
     </header>
@@ -67,7 +79,7 @@
     <section class="footersection obj-width">
       <div class="topWraper">
         <div class="top">
-          <img src="../icons/sharn.jfif" alt="" />
+          <img src="./icons/sharn.jfif" alt="" />
           <p>Search your desired jobs</p>
         </div>
         <div class="sideIcons">
@@ -164,5 +176,6 @@ console.log(document.getElementById("message")); // Should NOT be null
     });
   });
 </script>
-
+<script src="./script.js"></script>
 </html>
+

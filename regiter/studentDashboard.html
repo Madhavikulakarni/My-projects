@@ -1,4 +1,4 @@
-<!DOCTYPE NavBarhtml>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,17 +30,31 @@
     <img class="mainimg" src="../icons/header2.png" alt="" />
 
     <header>
+
       <nav class="navHeader">
-        <div class="responsiveNavBar">
-          <i class="fa-solid fa-bars"></i>
+   
+        <div class="hamburgerMenu">
+            <img id="hamMenuId" onclick="show()" src="../icons/assets/menu_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg " alt="">
         </div>
-                <div class="NavBar">
+
+        <div class="NavBar">
           <a href="../index.html">Home</a>
           <a href="../index.html#jobListing">Job Listings</a>
           <a href="../resources/resource.html">Resources</a>
           <a href="../alumini/alumini.html">Alumni</a>
           <a href="../regiter/register_index.html">Register</a>
           <a href="../contact.html">Contact</a>
+        </div>
+
+        <div class="resNav">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#jobListing">Job Listings</a>
+          <a href="../resources/resource.html">Resources</a>
+          <a href="../alumini/alumini.html">Alumni</a>
+          <a href="../regiter/register_index.html">Register</a>
+          <a href="../contact.html">Contact</a>
+          <img id="imgClose" src="../icons/assets/close_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+
         </div>
       </nav>
     </header>
@@ -115,7 +129,7 @@
       </div>
     </section>
   </body>
-</html>
+
 <script>
   const hardcodedJobs = [
     { logo: "./icons/paytm.png", title: "Web Developer", salary: "6LPA", company: "paytm" },
@@ -177,9 +191,11 @@
   logoutBtn.addEventListener("click", async () => {
     try {
       await signOut(auth);
-      window.location.href = "/regiter/register_index.html";
+    window.location.href = "/JobPortalFrontend/regiter/register_index.html";
     } catch (error) {
       alert("Error signing out: " + error.message);
     }
   });
 </script>
+<script src="../script.js"></script>
+</html>
